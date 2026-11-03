@@ -1,0 +1,43 @@
+import { Link } from "react-router-dom";
+import { previewText } from "../utils/richText";
+
+function CollectionCard({ item, number }) {
+  return (
+    <article className="collection-card">
+      <div className="collection-image">
+        {item.imageUrl || item.image ? (
+          <img
+            src={item.imageUrl || item.image}
+            alt={item.title}
+            className="collection-photo"
+          />
+        ) : (
+          <span>{number}</span>
+        )}
+      </div>
+      <Link
+        to={`/collections/${item._id}`}
+        className="discover-link"
+      >
+        <div className="collection-card-content">
+          <p className="collection-category">
+            {item.category}
+          </p>
+
+          <h3>{item.title}</h3>
+
+          <div className="collection-metadata">
+            <span>{item.period}</span>
+            <span>{item.origin}</span>
+          </div>
+
+          <p className="collection-description">
+            {previewText(item.description)}
+          </p>
+        </div>
+      </Link>
+    </article>
+  );
+}
+
+export default CollectionCard;
